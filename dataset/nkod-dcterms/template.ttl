@@ -1,0 +1,49 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix sd:    <http://www.w3.org/ns/sparql-service-description#> .
+
+@prefix lpd:       <https://discovery.linkedpipes.com/vocabulary/> .
+@prefix configuration-vocabulary:  <https://discovery.linkedpipes.com/vocabulary/dataset/dblp/configuration/> .
+@prefix d-sparql: <https://discovery.linkedpipes.com/vocabulary/datasource/sparql/> .
+
+@prefix dataset:  <https://discovery.linkedpipes.com/resource/dataset/nkod-dcterms/> .
+
+dataset:template a lpd:DataSourceTemplate ;
+	dcterms:title "Czech National Open Data Catalog - dataset DC terms only, 1 dataset"@en, "Národní katalog otevřených dat (NKOD) - jen dcterms datasetů"@cs ;
+	lpd:outputTemplate dataset:output ;
+	lpd:componentConfigurationTemplate dataset:defaultConfiguration .
+
+dataset:output a lpd:OutputDataPortTemplate ;
+	lpd:outputDataSample <https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/datasources/nkod-dcterms/sample.ttl> .
+	
+dataset:defaultConfiguration a d-sparql:SparqlEndpointDataSourceConfiguration ;
+	lpd:service dataset:defaultService ;
+	lpd:query """
+PREFIX dcat: <http://www.w3.org/ns/dcat#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+CONSTRUCT WHERE {
+<https://nkod.opendata.cz/zdroj/datová-sada/247025855> a dcat:Dataset;
+    dcterms:title ?title ;
+    dcterms:description ?description ;
+    dcterms:issued ?issued ;
+    dcterms:modified ?modified .
+}
+	""" ;
+	lpd:configurationQuery """
+		PREFIX dcterms: <http://purl.org/dc/terms/>
+		PREFIX lpd: <https://discovery.linkedpipes.com/vocabulary/>
+		PREFIX configuration-vocabulary: <https://discovery.linkedpipes.com/vocabulary/dataset/dblp/configuration/>
+		
+		CONSTRUCT {
+			?config a configuration-vocabulary:Configuration ;
+				lpd:query ?query ;
+				dcterms:title ?title .
+		} WHERE {
+			?config a configuration-vocabulary:Configuration .
+			OPTIONAL { ?config lpd:query ?query . }
+			OPTIONAL { ?config dcterms:title ?title . }
+		}
+	""" .
+
+dataset:defaultService a sd:Service ;
+	sd:endpoint <https://nkod.opendata.cz/sparql> .

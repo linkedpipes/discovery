@@ -1,0 +1,44 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix sd:    <http://www.w3.org/ns/sparql-service-description#> .
+@prefix lpd:       <https://discovery.linkedpipes.com/vocabulary/> .
+@prefix dataset:  <https://discovery.linkedpipes.com/resource/dataset/dblp/> .
+@prefix configuration-vocabulary:  <https://discovery.linkedpipes.com/vocabulary/dataset/dblp/configuration/> .
+@prefix d-sparql: <https://discovery.linkedpipes.com/vocabulary/datasource/sparql/> .
+
+dataset:template a lpd:DataSourceTemplate ;
+	dcterms:title "DBLP" ;
+	lpd:outputTemplate dataset:output ;
+	lpd:componentConfigurationTemplate dataset:defaultConfiguration .
+
+dataset:output a lpd:OutputDataPortTemplate ;
+	dcterms:title "DBLP triples" ;
+	lpd:outputDataSample <https://raw.githubusercontent.com/linkedpipes/discovery/master/data/rdf/datasources/dblp/sample.ttl> .
+	
+dataset:defaultConfiguration a d-sparql:SparqlEndpointDataSourceConfiguration ;
+	dcterms:title "Default DBLP configuration" ;
+	lpd:service dataset:defaultService ;
+	lpd:query """
+		CONSTRUCT {
+		  ?s ?p ?o .
+		} WHERE {
+		  ?s ?p ?o .
+		}
+	""" ;
+	lpd:configurationQuery """
+		PREFIX dcterms: <http://purl.org/dc/terms/>
+		PREFIX lpd: <https://discovery.linkedpipes.com/vocabulary/>
+		PREFIX configuration-vocabulary: <https://discovery.linkedpipes.com/vocabulary/dataset/dblp/configuration/>
+		
+		CONSTRUCT {
+			?config a configuration-vocabulary:Configuration ;
+				lpd:query ?query ;
+				dcterms:title ?title .
+		} WHERE {
+			?config a configuration-vocabulary:Configuration .
+			OPTIONAL { ?config lpd:query ?query . }
+			OPTIONAL { ?config dcterms:title ?title . }
+		}
+	""" .
+
+dataset:defaultService a sd:Service ;
+	sd:endpoint <http://dblp.l3s.de/d2r/sparql> .
