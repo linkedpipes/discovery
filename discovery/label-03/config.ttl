@@ -7,6 +7,14 @@
       <https://discovery.linkedpipes.com/resource/transformer/dce-to-dcterms-title/template>,
       <https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/template>,
       <https://discovery.linkedpipes.com/resource/transformer/schema-name-to-dcterms-title/template> ;
+
+    <urn:DiscoveryConfiguration> [
+        <urn:output> "./label-03-grouped" ;
+        <urn:filter> "no-filter" ;
+        <urn:store> "disk" ;
+        <urn:useMapping> true ;
+        <urn:strongGroups> true 
+    ] ;
 	  
     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformerGroup>
       <https://discovery.linkedpipes.com/resource/transformer-group/label-03/label>
