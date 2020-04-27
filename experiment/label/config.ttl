@@ -6,4 +6,7 @@
         <https://discovery.linkedpipes.com/resource/discovery/label-02/config> 
         <https://discovery.linkedpipes.com/resource/discovery/label-03/config> 
         <https://discovery.linkedpipes.com/resource/discovery/label-04/config> 		
-    ).
+    );
+    <urn:DiscoveryConfiguration> [
+        <urn:output> "./exp01"
+    ] .
