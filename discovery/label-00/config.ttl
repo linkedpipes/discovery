@@ -8,8 +8,8 @@
       <urn:output> "./label-00" ;
       <urn:filter> "no-filter" ;
       <urn:store> "disk" ;
-      <urn:useMapping> true ;
-      <urn:strongGroups> true 
+      <urn:useDataSampleMapping> true ;
+      <urn:useStrongGroups> true 
     ] ;
 	  
     .
