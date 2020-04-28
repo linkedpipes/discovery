@@ -8,11 +8,10 @@
       <https://discovery.linkedpipes.com/resource/transformer/skos-preflabel-to-dcterms-title/template> ;
 
     <urn:DiscoveryConfiguration> [
-        <urn:output> "./label-02-grouped" ;
         <urn:filter> "no-filter" ;
         <urn:store> "disk" ;
-        <urn:useMapping> true ;
-        <urn:strongGroups> true 
+        <urn:useDataSampleMapping> true ;
+        <urn:useStrongGroups> true 
     ] ;
 	  
     <https://discovery.linkedpipes.com/vocabulary/discovery/hasTransformerGroup>

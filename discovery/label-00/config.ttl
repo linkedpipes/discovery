@@ -5,7 +5,6 @@
       <https://discovery.linkedpipes.com/resource/application/dcterms/template> ;
 
     <urn:DiscoveryConfiguration> [
-      <urn:output> "./label-00" ;
       <urn:filter> "no-filter" ;
       <urn:store> "disk" ;
       <urn:useDataSampleMapping> true ;
